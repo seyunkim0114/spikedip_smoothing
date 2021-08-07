@@ -10,19 +10,24 @@ import torch.optim as optim
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure
 
-import sys
+from smoothing_spikedips import *
 
-def create_model(tmode, nmode, window, rank, tlength):
-    '''Create time factor smoothing model'''
-    model = smooth_tfactor(tmode, nmode, window, rank, tlength)
+def create_model(X, tmode, nmode1, nmode2, nmode, window, rank, tlength):
+    """Create time factor smoothing model"""
+    model = smooth_tfactor(X, tmode, nmode1, nmode2, nmode, window, rank, tlength)
     opt = torch.optim.SGD(model.parameters(),lr=0.001)
     return model, opt
 
-def train_model(epochs, model, loss, opt, temp)
+def train_model(epochs, model, opt, temp, tempval, nmode, n):
+    """Train the model"""
     for epoch in range(epochs):
         opt.zero_grad()
-        loss = get_loss(model,temp)
+        loss = get_loss(model, nmode, temp)
         loss.backward()
         opt.step()
-        print(f'Epoch: {epoch}, Loss: {loss}')
-    
+
+        lossval = get_loss(model, nmode, tempval)
+
+        print(f'Epoch: {epoch} \tLoss: {loss}\tVal: {lossval}')
+
+    return model(n)

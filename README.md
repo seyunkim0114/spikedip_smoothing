@@ -14,5 +14,8 @@ This is a PyTorch and Tensolry implementation of tensor forecast using Gaussian 
 3. Experiment settings can be changed by modifying src/main.py
 
 **Dataset**
-Datasets used in [TATD](https://github.com/snudatalab/TATD)
+Datasets provided [TATD](https://github.com/snudatalab/TATD)
+
+**Credits**
+[Dawon Ahn](https://github.com/dawonahn)
 
